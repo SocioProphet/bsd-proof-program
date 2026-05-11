@@ -1,0 +1,127 @@
+{
+  "claim_boundary": [
+    "State A infrastructure import only.",
+    "No M6 execution is claimed.",
+    "BSD-M6-002-four-descent-named-primes remains draft/E7.",
+    "No gate is marked pass by the import.",
+    "No claim is promoted."
+  ],
+  "expected_baseline": {
+    "by_tier": {
+      "H-E1-alg": 426,
+      "H-E2": 182
+    },
+    "total_rows": 608
+  },
+  "files": [
+    {
+      "sha256": "ee265f23737e12f65bd3666d2b00842af3c344b9b61989d69639161ed4557fdd",
+      "size_bytes": 78670,
+      "source_path": "bsd_dataset_v0_5.csv",
+      "target_path": "data/v0.5/bsd_dataset_v0_5.csv"
+    },
+    {
+      "sha256": "5b2d5b2b1c71dfc873d4dcc5a019b08411803b33b6c094662fd102dd2bfc18d3",
+      "size_bytes": 605830,
+      "source_path": "bsd_dataset_v0_5.json",
+      "target_path": "data/v0.5/bsd_dataset_v0_5.json"
+    },
+    {
+      "sha256": "aa79f6fbbcfaee4ac024c48ef6d4b90197835bc9be8f02eb5ca1d1d6f5eaf61c",
+      "size_bytes": 1490,
+      "source_path": "bsd_dataset_v0_5_validation.json",
+      "target_path": "reports/v0.5/bsd_dataset_v0_5_validation.json"
+    },
+    {
+      "sha256": "819d8404849a93c604c3754b4c706751c05d1cc4877d8ddbc85cf7293a8c62b1",
+      "size_bytes": 4946,
+      "source_path": "workstream_h/second_generator_search.json",
+      "target_path": "data/v0.5/second_generator_search.json"
+    },
+    {
+      "sha256": "157761bbd7845775df3ef1eb6cb56f016243cced1bb2c5202ab75ac69a4ed0f0",
+      "size_bytes": 546,
+      "source_path": "workstream_h/second_gen_extended_search.json",
+      "target_path": "data/v0.5/second_gen_extended_search.json"
+    },
+    {
+      "sha256": "fb33c64a83fe56d662b3373753fc78175a90d2622d4da07f9748922ee074eae8",
+      "size_bytes": 56287,
+      "source_path": "workstream_h/workstream_h_308_vec_results.json",
+      "target_path": "data/v0.5/workstream_h_308_vec_results.json"
+    },
+    {
+      "sha256": "ef6ff9fb22a8a181f7467f928c09628d0e28eec6ecfb88de1739c1c1f2f3ba95",
+      "size_bytes": 27130,
+      "source_path": "workstream_h/workstream_h_53_rows_consolidated.json",
+      "target_path": "data/v0.5/workstream_h_53_rows_consolidated.json"
+    },
+    {
+      "sha256": "f41e36238b64c547e31fdb8ce70d6619e2186ce1f8d7eab6fd54bf9c67c1deec",
+      "size_bytes": 1733,
+      "source_path": "workstream_h/workstream_h_second_generators.json",
+      "target_path": "data/v0.5/workstream_h_second_generators.json"
+    },
+    {
+      "sha256": "ec8b317d0ea29ca949c03bf73278f7e3d65b9a48c3151f1ff2cd954837d503b7",
+      "size_bytes": 20268,
+      "source_path": "workstream_h/workstream_h_point_search_53_rows.json",
+      "target_path": "data/v0.5/workstream_h_point_search_53_rows.json"
+    },
+    {
+      "sha256": "4cc847a7122c60f6e0e5237d43c03e4c1040efb5fdedc5eafda18e1d27bf57ef",
+      "size_bytes": 2871,
+      "source_path": "registry/bsd_registry_v021_stats.json",
+      "target_path": "reports/v0.5/bsd_registry_v021_stats.json"
+    },
+    {
+      "sha256": "5cc476c1c1d6649858fc0b0a0de5433ee82df47f1dc672039ecd56e296a4346c",
+      "size_bytes": 126548,
+      "source_path": "registry/bsd_registry_v021.csv",
+      "target_path": "data/v0.5/bsd_registry_v021.csv"
+    },
+    {
+      "sha256": "b4a8ddfd35bcf5c00881384294dfd639ef28058b7c73aa77a2a1f2c1d6327d43",
+      "size_bytes": 544525,
+      "source_path": "tunnell/tunnell_dataset_v0_1.json",
+      "target_path": "data/tunnell/tunnell_dataset_v0_1.json"
+    },
+    {
+      "sha256": "406ec613f9be96eb34e52b041007e8ee8f77b2e7181020a50c49f7e4c8df2241",
+      "size_bytes": 52782,
+      "source_path": "tunnell/tunnell_dataset_v0_1.csv",
+      "target_path": "data/tunnell/tunnell_dataset_v0_1.csv"
+    },
+    {
+      "sha256": "8e20402058dab6d531345ee4eb6e92fc37908002dfd6819c35d6cff5eb4d2151",
+      "size_bytes": 563,
+      "source_path": "tunnell/tunnell_validation_report_v0_1.json",
+      "target_path": "reports/tunnell/tunnell_validation_report_v0_1.json"
+    },
+    {
+      "sha256": "8b17e225e2a88a93902cdbc1a00e726677c40092ac5c8ac879e4799f66aab63e",
+      "size_bytes": 11332,
+      "source_path": "docs/53_rows_resolution.md",
+      "target_path": "docs/audit/53_rows_resolution.md"
+    },
+    {
+      "sha256": "a8d2c4ff20e8962098c96e17e8116523682dcfcf83911a4b49b80ab28a07765f",
+      "size_bytes": 18197,
+      "source_path": "docs/PROGRAM_LOG.md",
+      "target_path": "PROGRAM_LOG.md"
+    },
+    {
+      "sha256": "c6a4c830383d272d3bb5da6e21d6c849dd46a17669f9a0708750b3d9e773d413",
+      "size_bytes": 4952,
+      "source_path": "README.md",
+      "target_path": "docs/archive/bsd_v05_payload_README.md"
+    }
+  ],
+  "payload_tar_gz_base64_size_chars": 109844,
+  "payload_tar_gz_sha256": "38344edd6e126ca85953363db19c5646d3cc2764934517cc05a224f767b5c0ea",
+  "payload_tar_gz_size_bytes": 82383,
+  "schema_version": "bsd.v0.5.packed-payload.v1",
+  "source_upload_filename": "bsd v05 payload.zip",
+  "source_upload_sha256": "666ad565251701b23779c84005de0511eb018b7649bb46635cd9b8775cb0c607",
+  "state": "State A infrastructure import only"
+}
