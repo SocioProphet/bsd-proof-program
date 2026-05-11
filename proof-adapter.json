@@ -1,0 +1,153 @@
+{
+  "adapter_version": "0.1",
+  "repo": "SocioProphet/bsd-proof-program",
+  "domain": "elliptic-curves-congruent-number-bsd",
+  "controller_protocol": "protocol/proof-apparatus-workspace/v0",
+  "claims": [
+    {
+      "claim_id": "BSD-C5-001-consistency-grid",
+      "state": "diagnosed",
+      "severity": "E2",
+      "substrate": "congruent-number elliptic curve family over squarefree register",
+      "shell_level": "finite arithmetic consistency grid",
+      "projection": "Tunnell ternary counts, root-number n mod 8 datum, CM inert-prime checks",
+      "statement": "The BSD program maintains a C5-style arithmetic consistency gate combining Tunnell-style counts, root-number parity data, and CM consistency checks as evidence discipline, not as a proof of BSD.",
+      "boundary": [
+        "Finite-register consistency evidence only.",
+        "Does not prove BSD-I, BSD-II, or Tate-Shafarevich finiteness.",
+        "Contradictions in the grid quarantine affected rows rather than promote claims."
+      ],
+      "non_claim_refs": [
+        "bsd.no-full-bsd-proof",
+        "bsd.no-sha-finiteness-proof",
+        "bsd.no-unchecked-rank-promotion"
+      ],
+      "owned_gates": [
+        "tunnell-engine",
+        "root-number-grid",
+        "cm-consistency"
+      ],
+      "obstruction_walls": ["certificate_wall", "counting_wall"]
+    },
+    {
+      "claim_id": "BSD-M6-002-four-descent-named-primes",
+      "state": "draft",
+      "severity": "E7",
+      "substrate": "named-prime congruent-number curves in the M6 four-descent lane",
+      "shell_level": "explicit descent certificate candidate layer",
+      "projection": "four-descent ladder, descent-image filtering, bounded-height search",
+      "statement": "The M6 lane scopes four-descent work for named prime rows such as 257, 313, 353, and 457, with rank promotion blocked until descent certificates and independence checks pass without BSD/parity/Sha assumptions.",
+      "boundary": [
+        "Draft work item for unconditional algebraic-rank certification only.",
+        "Does not use BSD, parity, or Sha-finiteness assumptions to promote rank.",
+        "Regression rows that previously looked independent must remain guarded against torsion-translate false positives."
+      ],
+      "non_claim_refs": [
+        "bsd.no-full-bsd-proof",
+        "bsd.no-sha-finiteness-proof",
+        "bsd.no-unchecked-rank-promotion",
+        "bsd.no-parity-assumption-promotion"
+      ],
+      "owned_gates": [
+        "bounded-height-search",
+        "descent-image-filtering",
+        "four-descent-ladder"
+      ],
+      "obstruction_walls": ["certificate_wall", "height_bound_wall"]
+    },
+    {
+      "claim_id": "BSD-SHA-003-tower-bounding-diagnostic",
+      "state": "diagnosed",
+      "severity": "E7",
+      "substrate": "Tate-Shafarevich tower and higher-descent evidence ladder",
+      "shell_level": "2-power and higher-descent diagnostic shell",
+      "projection": "4-descent to 8-descent tower-bounding plan",
+      "statement": "The BSD program records Tate-Shafarevich finiteness as a diagnostic and obstruction lane, not as a proven output; higher-descent tower-bounding remains a certificate-wall problem.",
+      "boundary": [
+        "Diagnostic only.",
+        "No Sha finiteness claim.",
+        "No BSD-II leading-term certification."
+      ],
+      "non_claim_refs": [
+        "bsd.no-sha-finiteness-proof",
+        "bsd.no-bsd-ii-leading-term-proof"
+      ],
+      "owned_gates": [
+        "four-descent-ladder",
+        "sha-nonclaim-boundary"
+      ],
+      "obstruction_walls": ["certificate_wall", "height_bound_wall"]
+    }
+  ],
+  "gates": [
+    {
+      "gate_id": "tunnell-engine",
+      "kind": "test",
+      "status": "planned",
+      "expected": "Tunnell ternary count outputs are reproducible from frozen input register."
+    },
+    {
+      "gate_id": "root-number-grid",
+      "kind": "test",
+      "status": "planned",
+      "expected": "Root-number n mod 8 grid is reproducible and aligned with claim-boundary state."
+    },
+    {
+      "gate_id": "cm-consistency",
+      "kind": "test",
+      "status": "planned",
+      "expected": "CM consistency checks produce no contradiction on the declared finite register."
+    },
+    {
+      "gate_id": "bounded-height-search",
+      "kind": "test",
+      "status": "planned",
+      "expected": "Bounded-height search emits manifest-bound candidates and explicit misses."
+    },
+    {
+      "gate_id": "descent-image-filtering",
+      "kind": "test",
+      "status": "planned",
+      "expected": "Descent-image filtering rejects torsion translates and duplicate dependence witnesses."
+    },
+    {
+      "gate_id": "four-descent-ladder",
+      "kind": "test",
+      "status": "planned",
+      "expected": "Four-descent ladder emits exact rank bounds or a typed certificate wall."
+    },
+    {
+      "gate_id": "sha-nonclaim-boundary",
+      "kind": "non_claim_check",
+      "status": "planned",
+      "expected": "Sha finiteness and BSD-II leading-term claims remain blocked unless explicit certificates exist."
+    }
+  ],
+  "non_claims": [
+    {
+      "non_claim_id": "bsd.no-full-bsd-proof",
+      "statement": "This adapter does not claim a proof of BSD-I or BSD-II.",
+      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes"]
+    },
+    {
+      "non_claim_id": "bsd.no-sha-finiteness-proof",
+      "statement": "This adapter does not claim Tate-Shafarevich finiteness or BSD-II leading-term certification.",
+      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes", "BSD-SHA-003-tower-bounding-diagnostic"]
+    },
+    {
+      "non_claim_id": "bsd.no-unchecked-rank-promotion",
+      "statement": "This adapter does not promote rank claims without repo-local descent and SocioSphere gate evidence.",
+      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes"]
+    },
+    {
+      "non_claim_id": "bsd.no-parity-assumption-promotion",
+      "statement": "This adapter does not promote algebraic-rank claims using parity, BSD, or Sha-finiteness assumptions.",
+      "applies_to": ["BSD-M6-002-four-descent-named-primes"]
+    },
+    {
+      "non_claim_id": "bsd.no-bsd-ii-leading-term-proof",
+      "statement": "This adapter does not claim BSD-II leading-term formula certification.",
+      "applies_to": ["BSD-SHA-003-tower-bounding-diagnostic"]
+    }
+  ]
+}
