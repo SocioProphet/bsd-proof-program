@@ -3,7 +3,7 @@
   "state": "Candidate 2 positive-path C5 replay input",
   "source_upload_filename": "bsd v05 payload.zip",
   "source_upload_sha256": "666ad565251701b23779c84005de0511eb018b7649bb46635cd9b8775cb0c607",
-  "payload_tar_gz_sha256": "7db18c5c379b78da2b7fdfdd28f0c03fbb53f1288ca683200a500bb4e1cc2cfb",
+  "payload_tar_gz_sha256": "c0cd4e7268ad2d9797c39d7536e49de89d55eaee8ff164bc3d6edb87a9fc5657",
   "payload_tar_gz_size_bytes": 26001,
   "payload_tar_gz_base64_size_chars": 34668,
   "expected": {
@@ -15,7 +15,9 @@
     "claim_tier_split": {
       "H-E1-alg": 426,
       "H-E2": 182
-    }
+    },
+    "audit_false_positives": [313, 353],
+    "rank_2_unconditional_primes": [41, 137, 761]
   },
   "files": [
     {
