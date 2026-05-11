@@ -1,0 +1,29 @@
+{
+  "adapter_version": "0.1",
+  "repo": "SocioProphet/bsd-proof-program",
+  "domain": "elliptic-curves-congruent-number-bsd",
+  "controller_protocol": "protocol/proof-apparatus-workspace/v0",
+  "claims": [],
+  "gates": [
+    { "gate_id": "tunnell-engine", "kind": "test", "status": "planned" },
+    { "gate_id": "root-number-grid", "kind": "test", "status": "planned" },
+    { "gate_id": "cm-consistency", "kind": "test", "status": "planned" },
+    { "gate_id": "bounded-height-search", "kind": "test", "status": "planned" },
+    { "gate_id": "descent-image-filtering", "kind": "test", "status": "planned" },
+    { "gate_id": "four-descent-ladder", "kind": "test", "status": "planned" }
+  ],
+  "non_claims": [
+    {
+      "non_claim_id": "bsd.no-full-bsd-proof",
+      "statement": "This adapter does not claim a proof of BSD-I or BSD-II."
+    },
+    {
+      "non_claim_id": "bsd.no-sha-finiteness-proof",
+      "statement": "This adapter does not claim Tate-Shafarevich finiteness or BSD-II leading-term certification."
+    },
+    {
+      "non_claim_id": "bsd.no-unchecked-rank-promotion",
+      "statement": "This adapter does not promote rank claims without repo-local descent and SocioSphere gate evidence."
+    }
+  ]
+}
