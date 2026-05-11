@@ -12,21 +12,9 @@
       "shell_level": "finite arithmetic consistency grid",
       "projection": "Tunnell ternary counts, root-number n mod 8 datum, CM inert-prime checks",
       "statement": "The BSD program maintains a C5-style arithmetic consistency gate combining Tunnell-style counts, root-number parity data, and CM consistency checks as evidence discipline, not as a proof of BSD.",
-      "boundary": [
-        "Finite-register consistency evidence only.",
-        "Does not prove BSD-I, BSD-II, or Tate-Shafarevich finiteness.",
-        "Contradictions in the grid quarantine affected rows rather than promote claims."
-      ],
-      "non_claim_refs": [
-        "bsd.no-full-bsd-proof",
-        "bsd.no-sha-finiteness-proof",
-        "bsd.no-unchecked-rank-promotion"
-      ],
-      "owned_gates": [
-        "tunnell-engine",
-        "root-number-grid",
-        "cm-consistency"
-      ],
+      "boundary": ["Finite-register consistency evidence only.", "Does not prove BSD-I, BSD-II, or Tate-Shafarevich finiteness.", "Contradictions in the grid quarantine affected rows rather than promote claims."],
+      "non_claim_refs": ["bsd.no-full-bsd-proof", "bsd.no-sha-finiteness-proof", "bsd.no-unchecked-rank-promotion"],
+      "owned_gates": ["tunnell-engine", "root-number-grid", "cm-consistency"],
       "obstruction_walls": ["certificate_wall", "counting_wall"]
     },
     {
@@ -37,22 +25,9 @@
       "shell_level": "explicit descent certificate candidate layer",
       "projection": "four-descent ladder, descent-image filtering, bounded-height search",
       "statement": "The M6 lane scopes four-descent work for named prime rows such as 257, 313, 353, and 457, with rank promotion blocked until descent certificates and independence checks pass without BSD/parity/Sha assumptions.",
-      "boundary": [
-        "Draft work item for unconditional algebraic-rank certification only.",
-        "Does not use BSD, parity, or Sha-finiteness assumptions to promote rank.",
-        "Regression rows that previously looked independent must remain guarded against torsion-translate false positives."
-      ],
-      "non_claim_refs": [
-        "bsd.no-full-bsd-proof",
-        "bsd.no-sha-finiteness-proof",
-        "bsd.no-unchecked-rank-promotion",
-        "bsd.no-parity-assumption-promotion"
-      ],
-      "owned_gates": [
-        "bounded-height-search",
-        "descent-image-filtering",
-        "four-descent-ladder"
-      ],
+      "boundary": ["Draft work item for unconditional algebraic-rank certification only.", "Does not use BSD, parity, or Sha-finiteness assumptions to promote rank.", "Regression rows that previously looked independent must remain guarded against torsion-translate false positives.", "Negative-test rerun marker: this branch intentionally violates repo-local promotion discipline to verify failure artifacts."],
+      "non_claim_refs": ["bsd.no-full-bsd-proof", "bsd.no-sha-finiteness-proof", "bsd.no-unchecked-rank-promotion", "bsd.no-parity-assumption-promotion"],
+      "owned_gates": ["bounded-height-search", "descent-image-filtering", "four-descent-ladder"],
       "obstruction_walls": ["certificate_wall", "height_bound_wall"]
     },
     {
@@ -63,19 +38,9 @@
       "shell_level": "2-power and higher-descent diagnostic shell",
       "projection": "4-descent to 8-descent tower-bounding plan",
       "statement": "The BSD program records Tate-Shafarevich finiteness as a diagnostic and obstruction lane, not as a proven output; higher-descent tower-bounding remains a certificate-wall problem.",
-      "boundary": [
-        "Diagnostic only.",
-        "No Sha finiteness claim.",
-        "No BSD-II leading-term certification."
-      ],
-      "non_claim_refs": [
-        "bsd.no-sha-finiteness-proof",
-        "bsd.no-bsd-ii-leading-term-proof"
-      ],
-      "owned_gates": [
-        "four-descent-ladder",
-        "sha-nonclaim-boundary"
-      ],
+      "boundary": ["Diagnostic only.", "No Sha finiteness claim.", "No BSD-II leading-term certification."],
+      "non_claim_refs": ["bsd.no-sha-finiteness-proof", "bsd.no-bsd-ii-leading-term-proof"],
+      "owned_gates": ["four-descent-ladder", "sha-nonclaim-boundary"],
       "obstruction_walls": ["certificate_wall", "height_bound_wall"]
     }
   ],
