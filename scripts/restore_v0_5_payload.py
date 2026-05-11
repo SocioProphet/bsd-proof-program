@@ -1,19 +1,14 @@
 #!/usr/bin/env python3
 """Restore the packed BSD v0.5 payload into canonical repo paths.
 
-The payload is stored as a base64-encoded gzip tarball so text/data assets from
-an uploaded archive can be preserved through connector paths that cannot attach
-native binary files directly.
-
-This script is State A infrastructure only. It restores data/scripts/docs and
-verifies SHA-256 identity; it does not promote claims or mark gates as passed.
+State A infrastructure only. This restores declared data/report files and verifies
+SHA-256 identity. It does not promote claims or mark gates as passed.
 """
 
 from __future__ import annotations
 
 import argparse
 import base64
-import gzip
 import hashlib
 import json
 import shutil
@@ -22,8 +17,10 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "payloads" / "v0.5" / "bsd_v05_required_manifest.json"
-PAYLOAD = ROOT / "payloads" / "v0.5" / "bsd_v05_required_text.tar.gz.b64"
+PAYLOAD_DIR = ROOT / "payloads" / "v0.5"
+MANIFEST = PAYLOAD_DIR / "bsd_v05_required_manifest.json"
+SINGLE_PAYLOAD = PAYLOAD_DIR / "bsd_v05_required_text.tar.gz.b64"
+CHUNK_GLOB = "bsd_v05_required_text.tar.gz.b64.part*"
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -42,8 +39,19 @@ def load_manifest() -> dict:
     return json.loads(MANIFEST.read_text(encoding="utf-8"))
 
 
-def decode_payload(expected_sha: str) -> bytes:
-    encoded = "".join(PAYLOAD.read_text(encoding="utf-8").split())
+def read_encoded_payload() -> str:
+    if SINGLE_PAYLOAD.exists():
+        return "".join(SINGLE_PAYLOAD.read_text(encoding="utf-8").split())
+    parts = sorted(PAYLOAD_DIR.glob(CHUNK_GLOB))
+    if not parts:
+        raise SystemExit(f"no payload file or chunks found under {PAYLOAD_DIR}")
+    return "".join("".join(part.read_text(encoding="utf-8").split()) for part in parts)
+
+
+def decode_payload(expected_sha: str, expected_b64_chars: int | None = None) -> bytes:
+    encoded = read_encoded_payload()
+    if expected_b64_chars is not None and len(encoded) != expected_b64_chars:
+        raise SystemExit(f"payload base64 length mismatch: expected {expected_b64_chars}, got {len(encoded)}")
     payload_bytes = base64.b64decode(encoded)
     actual_sha = sha256_bytes(payload_bytes)
     if actual_sha != expected_sha:
@@ -53,39 +61,45 @@ def decode_payload(expected_sha: str) -> bytes:
 
 def restore(*, check_only: bool = False) -> None:
     manifest = load_manifest()
-    payload_bytes = decode_payload(manifest["payload_tar_gz_sha256"])
+    payload_bytes = decode_payload(manifest["payload_tar_gz_sha256"], manifest.get("payload_tar_gz_base64_size_chars"))
+    declared = {item["source_path"]: item for item in manifest["files"]}
 
     with tempfile.TemporaryDirectory(prefix="bsd-v05-payload-") as tmpdir:
         tmp = Path(tmpdir)
         tar_path = tmp / "payload.tar.gz"
         tar_path.write_bytes(payload_bytes)
+        unpacked: dict[str, bytes] = {}
 
         with tarfile.open(tar_path, "r:gz") as tar:
-            tar.extractall(tmp / "src")
+            for member in tar.getmembers():
+                if member.isdir():
+                    continue
+                name = member.name
+                if name not in declared:
+                    raise SystemExit(f"unexpected payload member: {name}")
+                stream = tar.extractfile(member)
+                if stream is None:
+                    raise SystemExit(f"could not read payload member: {name}")
+                unpacked[name] = stream.read()
 
         restored = []
-        for item in manifest["files"]:
-            source = tmp / "src" / item["source_path"]
-            target = ROOT / item["target_path"]
-            if not source.exists():
-                raise SystemExit(f"payload source missing: {item['source_path']}")
-            data = source.read_bytes()
+        for source_name, item in declared.items():
+            if source_name not in unpacked:
+                raise SystemExit(f"payload source missing: {source_name}")
+            data = unpacked[source_name]
             actual_source_sha = sha256_bytes(data)
             if actual_source_sha != item["sha256"]:
-                raise SystemExit(
-                    f"source sha mismatch for {item['source_path']}: "
-                    f"expected {item['sha256']}, got {actual_source_sha}"
-                )
+                raise SystemExit(f"source sha mismatch for {source_name}: expected {item['sha256']}, got {actual_source_sha}")
+
+            target = ROOT / item["target_path"]
             if not check_only:
                 target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(source, target)
+                target.write_bytes(data)
+
             if target.exists():
                 actual_target_sha = sha256_file(target)
                 if actual_target_sha != item["sha256"]:
-                    raise SystemExit(
-                        f"target sha mismatch for {item['target_path']}: "
-                        f"expected {item['sha256']}, got {actual_target_sha}"
-                    )
+                    raise SystemExit(f"target sha mismatch for {item['target_path']}: expected {item['sha256']}, got {actual_target_sha}")
             elif check_only:
                 raise SystemExit(f"target missing in check mode: {item['target_path']}")
             restored.append(item["target_path"])
@@ -95,14 +109,10 @@ def restore(*, check_only: bool = False) -> None:
         print(f"  {target}")
 
 
-def parse_args() -> argparse.Namespace:
+def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Verify already-restored files without writing them.")
-    return parser.parse_args()
-
-
-def main() -> int:
-    args = parse_args()
+    args = parser.parse_args()
     restore(check_only=args.check)
     return 0
 
