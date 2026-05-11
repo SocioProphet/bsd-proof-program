@@ -25,7 +25,7 @@
       "shell_level": "explicit descent certificate candidate layer",
       "projection": "four-descent ladder, descent-image filtering, bounded-height search",
       "statement": "The M6 lane scopes four-descent work for named prime rows such as 257, 313, 353, and 457, with rank promotion blocked until descent certificates and independence checks pass without BSD/parity/Sha assumptions.",
-      "boundary": ["Draft work item for unconditional algebraic-rank certification only.", "Does not use BSD, parity, or Sha-finiteness assumptions to promote rank.", "Regression rows that previously looked independent must remain guarded against torsion-translate false positives."],
+      "boundary": ["Draft work item for unconditional algebraic-rank certification only.", "Does not use BSD, parity, or Sha-finiteness assumptions to promote rank.", "Regression rows that previously looked independent must remain guarded against torsion-translate false positives.", "Negative-test rerun marker: this branch intentionally references an undeclared non-claim to verify failure artifacts."],
       "non_claim_refs": ["bsd.no-full-bsd-proof", "bsd.no-sha-finiteness-proof", "bsd.no-unchecked-rank-promotion", "bsd.no-parity-assumption-promotion", "bsd.no-such-nonclaim"],
       "owned_gates": ["bounded-height-search", "descent-image-filtering", "four-descent-ladder"],
       "obstruction_walls": ["certificate_wall", "height_bound_wall"]
