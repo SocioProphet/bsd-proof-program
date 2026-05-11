@@ -1,0 +1,55 @@
+name: Milestone 5 orbit scaffold
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/milestone5/**'
+      - 'schemas/milestone5_orbit_candidate.schema.json'
+      - 'scripts/milestone5_orbit_scaffold.py'
+      - 'proof-adapter.json'
+      - '.github/workflows/milestone-5-orbit-scaffold.yml'
+  pull_request:
+    paths:
+      - 'data/milestone5/**'
+      - 'schemas/milestone5_orbit_candidate.schema.json'
+      - 'scripts/milestone5_orbit_scaffold.py'
+      - 'proof-adapter.json'
+      - '.github/workflows/milestone-5-orbit-scaffold.yml'
+
+jobs:
+  milestone-5-orbit-scaffold:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate JSON files
+        run: |
+          python3 -m json.tool data/milestone5/m5_four_prime_baseline.json >/dev/null
+          python3 -m json.tool schemas/milestone5_orbit_candidate.schema.json >/dev/null
+          python3 -m json.tool proof-adapter.json >/dev/null
+
+      - name: Run Milestone 5 scaffold
+        run: python3 scripts/milestone5_orbit_scaffold.py
+
+      - name: Print Milestone 5 scaffold artifacts
+        run: |
+          echo '--- m5_scaffold_result.md ---'
+          cat reports/milestone5/m5_scaffold_result.md
+          echo '--- m5_scaffold_summary.json ---'
+          cat reports/milestone5/m5_scaffold_summary.json
+          echo '--- m5_scaffold_events.jsonl ---'
+          cat reports/milestone5/m5_scaffold_events.jsonl
+
+      - name: Upload Milestone 5 scaffold artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: milestone-5-orbit-scaffold-artifacts
+          path: reports/milestone5/**
+          if-no-files-found: error
