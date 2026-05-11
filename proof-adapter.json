@@ -77,6 +77,32 @@
         "sha-nonclaim-boundary"
       ],
       "obstruction_walls": ["certificate_wall", "height_bound_wall"]
+    },
+    {
+      "claim_id": "BSD-M5-004-orbit-membership-scaffold",
+      "state": "draft",
+      "severity": "E7",
+      "substrate": "four-prime M6 follow-up cohort {257, 313, 353, 457}",
+      "shell_level": "controller-routed candidate filtering scaffold",
+      "projection": "P1 verification, target classification, torsion-orbit-aware candidate schema, digest-addressed scaffold events",
+      "statement": "Milestone 5 begins by installing an orbit-membership-aware scaffold for the four unresolved second-generator targets. The scaffold verifies inherited P1 points and classifies target failure modes, but does not certify rank exactness or independence.",
+      "boundary": [
+        "Scaffold only; no second independent point is certified.",
+        "No four-descent gate has executed.",
+        "No rank exactness claim is made for primes where search returns negative within stated bounds.",
+        "Any later independence claim must include torsion-orbit membership testing and controller-witnessed input/output digests."
+      ],
+      "non_claim_refs": [
+        "bsd.no-full-bsd-proof",
+        "bsd.no-sha-finiteness-proof",
+        "bsd.no-unchecked-rank-promotion",
+        "bsd.no-parity-assumption-promotion",
+        "bsd.no-m5-rank-exactness-for-negative-search"
+      ],
+      "owned_gates": [
+        "m5-orbit-membership-scaffold"
+      ],
+      "obstruction_walls": ["certificate_wall", "height_bound_wall"]
     }
   ],
   "gates": [
@@ -121,33 +147,46 @@
       "kind": "non_claim_check",
       "status": "planned",
       "expected": "Sha finiteness and BSD-II leading-term claims remain blocked unless explicit certificates exist."
+    },
+    {
+      "gate_id": "m5-orbit-membership-scaffold",
+      "kind": "test",
+      "status": "planned",
+      "command": "python3 scripts/milestone5_orbit_scaffold.py",
+      "fixture": "data/milestone5/m5_four_prime_baseline.json",
+      "expected": "Verifies inherited P1 points on curve, classifies all four targets, and emits digest-addressed scaffold events without promoting any rank or independence claim."
     }
   ],
   "non_claims": [
     {
       "non_claim_id": "bsd.no-full-bsd-proof",
       "statement": "This adapter does not claim a proof of BSD-I or BSD-II.",
-      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes"]
+      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes", "BSD-M5-004-orbit-membership-scaffold"]
     },
     {
       "non_claim_id": "bsd.no-sha-finiteness-proof",
       "statement": "This adapter does not claim Tate-Shafarevich finiteness or BSD-II leading-term certification.",
-      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes", "BSD-SHA-003-tower-bounding-diagnostic"]
+      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes", "BSD-SHA-003-tower-bounding-diagnostic", "BSD-M5-004-orbit-membership-scaffold"]
     },
     {
       "non_claim_id": "bsd.no-unchecked-rank-promotion",
       "statement": "This adapter does not promote rank claims without repo-local descent and SocioSphere gate evidence.",
-      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes"]
+      "applies_to": ["BSD-C5-001-consistency-grid", "BSD-M6-002-four-descent-named-primes", "BSD-M5-004-orbit-membership-scaffold"]
     },
     {
       "non_claim_id": "bsd.no-parity-assumption-promotion",
       "statement": "This adapter does not promote algebraic-rank claims using parity, BSD, or Sha-finiteness assumptions.",
-      "applies_to": ["BSD-M6-002-four-descent-named-primes"]
+      "applies_to": ["BSD-M6-002-four-descent-named-primes", "BSD-M5-004-orbit-membership-scaffold"]
     },
     {
       "non_claim_id": "bsd.no-bsd-ii-leading-term-proof",
       "statement": "This adapter does not claim BSD-II leading-term formula certification.",
       "applies_to": ["BSD-SHA-003-tower-bounding-diagnostic"]
+    },
+    {
+      "non_claim_id": "bsd.no-m5-rank-exactness-for-negative-search",
+      "statement": "Milestone 5 scaffold and any negative search within declared bounds do not prove rank exactness or absence of a second generator beyond those bounds.",
+      "applies_to": ["BSD-M5-004-orbit-membership-scaffold"]
     }
   ]
 }

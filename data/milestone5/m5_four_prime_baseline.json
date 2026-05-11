@@ -1,0 +1,61 @@
+{
+  "schema_version": "bsd.milestone5.four-prime-baseline.v1",
+  "state": "Milestone 5 scaffold; inherited evidence only",
+  "validation_marker": "rerun-2026-05-11",
+  "claim_boundary": [
+    "This baseline is inherited input for controller-routed Milestone 5 gates.",
+    "It does not certify rank exactness for unresolved targets.",
+    "It does not promote any claim or mark any gate as passed."
+  ],
+  "targets": [
+    {
+      "n": 257,
+      "search_class": "no_second_generator_found",
+      "baseline": {
+        "claim_tier": "H-E1-alg",
+        "alg_rank_method": "explicit_point_HB_selmer4",
+        "alg_rank_exact_known": false,
+        "alg_rank_exact": null,
+        "second_independent_point_certified": false,
+        "promoted_in_milestone": 4,
+        "alg_rank_lower": 1,
+        "alg_rank_upper": 2,
+        "BSD_used": false,
+        "parity_used": false,
+        "sha_finite_assumed": false
+      },
+      "P1": {"x_num": 34225, "x_den": 49, "y_num": 5887440, "y_den": 343, "on_curve_verified_inherited": true, "descent_image": [1, 2]},
+      "historical_search": {"candidates_found": 0, "n_unique_pts_found": 1, "different_descent_examples": []}
+    },
+    {
+      "n": 313,
+      "search_class": "historical_false_positive_requires_orbit_filter",
+      "baseline": {"claim_tier": "H-E1-alg", "alg_rank_method": "explicit_point_HB_selmer4", "alg_rank_exact_known": false, "alg_rank_exact": null, "second_independent_point_certified": false, "promoted_in_milestone": 4, "alg_rank_lower": 1, "alg_rank_upper": 2, "BSD_used": false, "parity_used": false, "sha_finite_assumed": false},
+      "P1": {"x_num": -25, "x_den": 1, "y_num": 1560, "y_den": 1, "on_curve_verified_inherited": true, "descent_image": [-1, -2]},
+      "historical_search": {"candidates_found": 3, "historical_false_positive": {"Q_x": "97969/25", "torsion_relation": "Q = P1 + (0,0)", "audit_correction": "candidate was in P1 torsion orbit despite different descent image"}}
+    },
+    {
+      "n": 353,
+      "search_class": "historical_false_positive_requires_orbit_filter",
+      "baseline": {"claim_tier": "H-E1-alg", "alg_rank_method": "explicit_point_HB_selmer4", "alg_rank_exact_known": false, "alg_rank_exact": null, "second_independent_point_certified": false, "promoted_in_milestone": 4, "alg_rank_lower": 1, "alg_rank_upper": 2, "BSD_used": false, "parity_used": false, "sha_finite_assumed": false},
+      "P1": {"x_num": -225, "x_den": 1, "y_num": 4080, "y_den": 1, "on_curve_verified_inherited": true, "descent_image": [-1, -2]},
+      "historical_search": {"candidates_found": 3, "historical_false_positive": {"Q_x": "102017/64", "torsion_relation": "Q = P1 + (-353,0)", "audit_correction": "candidate was in P1 torsion orbit despite different descent image"}}
+    },
+    {
+      "n": 457,
+      "search_class": "no_second_generator_found",
+      "baseline": {"claim_tier": "H-E1-alg", "alg_rank_method": "explicit_point_HB_selmer4", "alg_rank_exact_known": false, "alg_rank_exact": null, "second_independent_point_certified": false, "promoted_in_milestone": 4, "alg_rank_lower": 1, "alg_rank_upper": 2, "BSD_used": false, "parity_used": false, "sha_finite_assumed": false},
+      "P1": {"x_num": 105625, "x_den": 49, "y_num": 33547800, "y_den": 343, "on_curve_verified_inherited": true, "descent_image": [1, 2]},
+      "historical_search": {"candidates_found": 0, "n_unique_pts_found": 1, "different_descent_examples": []}
+    }
+  ],
+  "required_controller_checks": [
+    "materialize target row and P1 from triggering repo/ref/SHA",
+    "hash row, P1, candidate, and search bounds as gate inputs",
+    "verify P1 on E_n: y^2 = x^3 - n^2 x",
+    "verify candidate on E_n before interpretation",
+    "compute and record descent image",
+    "test candidate against P1 torsion orbit before any independence claim",
+    "record independent/certified-no-result/typed-obstruction output digest"
+  ]
+}

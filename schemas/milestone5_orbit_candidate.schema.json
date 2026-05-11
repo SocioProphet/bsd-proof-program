@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SocioProphet/bsd-proof-program/schemas/milestone5_orbit_candidate.schema.json",
+  "title": "Milestone 5 orbit-membership candidate record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "n",
+    "candidate_id",
+    "candidate_point",
+    "candidate_source",
+    "search_bounds",
+    "checks"
+  ],
+  "properties": {
+    "n": {"type": "integer"},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "candidate_source": {"type": "string", "enum": ["extended_bound_search", "four_descent", "heegner", "historical_recheck", "manual_fixture"]},
+    "candidate_point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x_num", "x_den", "y_num", "y_den"],
+      "properties": {
+        "x_num": {"type": "integer"},
+        "x_den": {"type": "integer", "minimum": 1},
+        "y_num": {"type": "integer"},
+        "y_den": {"type": "integer", "minimum": 1}
+      }
+    },
+    "search_bounds": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["description"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "on_curve_verified",
+        "descent_image_recorded",
+        "torsion_orbit_checked",
+        "in_p1_torsion_orbit",
+        "independent_candidate"
+      ],
+      "properties": {
+        "on_curve_verified": {"type": "boolean"},
+        "descent_image_recorded": {"type": "boolean"},
+        "torsion_orbit_checked": {"type": "boolean"},
+        "in_p1_torsion_orbit": {"type": "boolean"},
+        "independent_candidate": {"type": "boolean"},
+        "descent_image": {
+          "type": "array",
+          "items": {"type": "integer"}
+        },
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
