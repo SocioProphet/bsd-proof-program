@@ -1,0 +1,58 @@
+name: Validate State A v0.5 payload
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'payloads/v0.5/**'
+      - 'scripts/restore_v0_5_payload.py'
+      - 'scripts/smoke_test.py'
+      - 'm6/scripts/m6_0_freeze_v0_5.py'
+      - '.github/workflows/validate-state-a-v05.yml'
+  pull_request:
+    paths:
+      - 'payloads/v0.5/**'
+      - 'scripts/restore_v0_5_payload.py'
+      - 'scripts/smoke_test.py'
+      - 'm6/scripts/m6_0_freeze_v0_5.py'
+      - '.github/workflows/validate-state-a-v05.yml'
+
+jobs:
+  validate-state-a-v05:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Restore packed v0.5 payload
+        run: python3 scripts/restore_v0_5_payload.py
+
+      - name: Verify restored v0.5 payload hashes
+        run: python3 scripts/restore_v0_5_payload.py --check
+
+      - name: Run State A smoke test
+        run: python3 scripts/smoke_test.py
+
+      - name: Run M6.0 freeze validator
+        run: python3 -m m6.scripts.m6_0_freeze_v0_5
+
+      - name: Print freeze artifacts
+        run: |
+          echo '--- MANIFEST_v0_5.sha256 ---'
+          cat reports/v0.6/m6.0/MANIFEST_v0_5.sha256
+          echo '--- v0_5_ingest_report.json ---'
+          cat reports/v0.6/m6.0/v0_5_ingest_report.json
+          echo '--- v0_5_claim_manifest.md ---'
+          cat reports/v0.6/m6.0/v0_5_claim_manifest.md
+
+      - name: Upload State A freeze artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: state-a-v05-freeze-artifacts
+          path: reports/v0.6/m6.0/**
+          if-no-files-found: error

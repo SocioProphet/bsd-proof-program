@@ -1,0 +1,43 @@
+{
+  "schema_version": "bsd.v0.5.minimal-packed-payload.v1",
+  "state": "State A infrastructure import only",
+  "source_upload_filename": "bsd v05 payload.zip",
+  "source_upload_sha256": "666ad565251701b23779c84005de0511eb018b7649bb46635cd9b8775cb0c607",
+  "payload_tar_gz_sha256": "8dd75bf39599d727f1568bfd2d4c998e968b4612242cc53086616dfd9153721a",
+  "payload_tar_gz_size_bytes": 13237,
+  "payload_tar_gz_base64_size_chars": 17652,
+  "expected_baseline": {
+    "total_rows": 608,
+    "by_tier": {
+      "H-E1-alg": 426,
+      "H-E2": 182
+    }
+  },
+  "claim_boundary": [
+    "State A infrastructure import only.",
+    "No M6 execution is claimed.",
+    "BSD-M6-002-four-descent-named-primes remains draft/E7.",
+    "No gate is marked pass by the import.",
+    "No claim is promoted."
+  ],
+  "files": [
+    {
+      "source_path": "data/v0.5/bsd_dataset_v0_5.csv",
+      "target_path": "data/v0.5/bsd_dataset_v0_5.csv",
+      "sha256": "ee265f23737e12f65bd3666d2b00842af3c344b9b61989d69639161ed4557fdd",
+      "size_bytes": 78670
+    },
+    {
+      "source_path": "data/v0.5/bsd_dataset_v0_5.json",
+      "target_path": "data/v0.5/bsd_dataset_v0_5.json",
+      "sha256": "5b2d5b2b1c71dfc873d4dcc5a019b08411803b33b6c094662fd102dd2bfc18d3",
+      "size_bytes": 605830
+    },
+    {
+      "source_path": "reports/v0.5/bsd_dataset_v0_5_validation.json",
+      "target_path": "reports/v0.5/bsd_dataset_v0_5_validation.json",
+      "sha256": "aa79f6fbbcfaee4ac024c48ef6d4b90197835bc9be8f02eb5ca1d1d6f5eaf61c",
+      "size_bytes": 1490
+    }
+  ]
+}
