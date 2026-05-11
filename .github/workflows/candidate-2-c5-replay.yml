@@ -1,0 +1,55 @@
+name: Candidate 2 C5 replay
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/candidate2_v05_positive_replay.py'
+      - 'scripts/restore_v0_5_payload.py'
+      - 'payloads/v0.5/**'
+      - '.github/workflows/candidate-2-c5-replay.yml'
+  pull_request:
+    paths:
+      - 'scripts/candidate2_v05_positive_replay.py'
+      - 'scripts/restore_v0_5_payload.py'
+      - 'payloads/v0.5/**'
+      - '.github/workflows/candidate-2-c5-replay.yml'
+
+jobs:
+  candidate-2-c5-replay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Restore v0.5 baseline
+        run: python3 scripts/restore_v0_5_payload.py
+
+      - name: Verify restored v0.5 baseline
+        run: python3 scripts/restore_v0_5_payload.py --check
+
+      - name: Run Candidate 2 positive replay
+        run: python3 scripts/candidate2_v05_positive_replay.py
+
+      - name: Print Candidate 2 artifacts
+        run: |
+          echo '--- candidate2_result.md ---'
+          cat reports/candidate2/candidate2_result.md
+          echo '--- candidate2_summary.json ---'
+          cat reports/candidate2/candidate2_summary.json
+          echo '--- ledger event count ---'
+          wc -l reports/candidate2/candidate2_ledger_events.jsonl
+          echo '--- first ledger events ---'
+          head -n 5 reports/candidate2/candidate2_ledger_events.jsonl
+
+      - name: Upload Candidate 2 artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-2-c5-replay-artifacts
+          path: reports/candidate2/**
+          if-no-files-found: error
