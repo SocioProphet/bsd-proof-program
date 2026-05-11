@@ -1,0 +1,34 @@
+{
+  "schema_version": "bsd.candidate2.c5-registry-payload.v1",
+  "state": "Candidate 2 positive-path C5 replay input",
+  "source_upload_filename": "bsd v05 payload.zip",
+  "source_upload_sha256": "666ad565251701b23779c84005de0511eb018b7649bb46635cd9b8775cb0c607",
+  "payload_tar_gz_sha256": "7db18c5c379b78da2b7fdfdd28f0c03fbb53f1288ca683200a500bb4e1cc2cfb",
+  "payload_tar_gz_size_bytes": 26001,
+  "payload_tar_gz_base64_size_chars": 34668,
+  "expected": {
+    "registry_total_rows": 1000,
+    "squarefree_rows": 608,
+    "c5_hasse_pass_squarefree": 608,
+    "c5_tunnell_eps_pass_squarefree": 608,
+    "c5_cm_pass_squarefree": 608,
+    "claim_tier_split": {
+      "H-E1-alg": 426,
+      "H-E2": 182
+    }
+  },
+  "files": [
+    {
+      "source_path": "data/v0.5/bsd_registry_v021.csv",
+      "target_path": "data/v0.5/bsd_registry_v021.csv",
+      "sha256": "5cc476c1c1d6649858fc0b0a0de5433ee82df47f1dc672039ecd56e296a4346c",
+      "size_bytes": 126548
+    },
+    {
+      "source_path": "reports/v0.5/bsd_registry_v021_stats.json",
+      "target_path": "reports/v0.5/bsd_registry_v021_stats.json",
+      "sha256": "4cc847a7122c60f6e0e5237d43c03e4c1040efb5fdedc5eafda18e1d27bf57ef",
+      "size_bytes": 2871
+    }
+  ]
+}
