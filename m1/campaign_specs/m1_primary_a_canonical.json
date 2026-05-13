@@ -1,0 +1,34 @@
+{
+  "spectral_source": "external_zero_table_required",
+  "campaign": {
+    "name": "m1_primary_a_canonical",
+    "kind": "canonical",
+    "spectral_control": "canonical"
+  },
+  "sweep": {
+    "name": "primary_a_canonical_sweep",
+    "intervals": [
+      {"ref": "I1"},
+      {"ref": "I2"},
+      {"ref": "I3"}
+    ],
+    "truncation_levels": [1, 10, 50, 100, 200],
+    "du_values": [0.0025],
+    "normalization_modes": [
+      "additive",
+      "log_volume",
+      "rh_envelope",
+      "prime_flux",
+      "box_prime_flux"
+    ]
+  },
+  "gates": [
+    {
+      "name": "stationarity",
+      "params": {
+        "summary": "box_prime_flux",
+        "max_variance": 1000000000000000000000000000000
+      }
+    }
+  ]
+}
