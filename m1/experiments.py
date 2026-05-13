@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from hashlib import sha256
 from pathlib import Path
 
@@ -9,6 +9,7 @@ from m1.benchmarks import BenchmarkInterval
 from m1.li_quadrature import QuadratureConfig
 from m1.normalization import NormalizationMode, normalize_residual
 from m1.psi_residual import compute_residual
+from m1.serialization import to_jsonable
 from m1.statistics import StationaritySummary, summarize_stationarity
 
 
@@ -45,7 +46,7 @@ class ExperimentError(RuntimeError):
 
 
 def canonical_hash(obj: object) -> str:
-    text = json.dumps(obj, sort_keys=True, default=str)
+    text = json.dumps(to_jsonable(obj), sort_keys=True)
     return sha256(text.encode("utf-8")).hexdigest()
 
 
@@ -104,18 +105,18 @@ def run_sweep(spec: SweepSpec, gammas: list[float]) -> SweepResult:
         summaries[str(mode.value)] = summarize_stationarity(vals)
 
     return SweepResult(
-        spec_hash=canonical_hash(asdict(spec)),
+        spec_hash=canonical_hash(spec),
         observations=observations,
         summaries=summaries,
     )
 
 
 def write_sweep_result(path: str | Path, result: SweepResult) -> str:
-    payload = asdict(result)
+    payload = to_jsonable(result)
     digest = canonical_hash(payload)
     wrapped = {
         "result_sha256": digest,
         "payload": payload,
     }
-    Path(path).write_text(json.dumps(wrapped, indent=2, sort_keys=True, default=str))
+    Path(path).write_text(json.dumps(wrapped, indent=2, sort_keys=True))
     return digest
