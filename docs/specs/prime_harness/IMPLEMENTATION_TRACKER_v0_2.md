@@ -9,6 +9,10 @@ Claim ledger: `docs/specs/prime_harness/CLAIMS_v0_2.md`.
 
 This tranche lands the corrected benchmark protocol only. It does not claim benchmark results and does not implement primality or residual computations yet.
 
+Repository home: `SocioProphet/bsd-proof-program`.
+
+M0 deliverable format: prose SPEC + claim ledger + implementation tracker. Machine-readable gate/schema files are deferred to M1 unless required by CI wiring.
+
 ## M0 — SPEC v0.2 patch
 
 - [x] Bound `classical ceiling` to declared benchmark parameters.
@@ -21,6 +25,9 @@ This tranche lands the corrected benchmark protocol only. It does not claim benc
 - [x] Reorder implementation to ψ-first, then π residual.
 - [x] Add G0 zero-table provenance gate.
 - [x] Add claim ledger and false-claim boundaries.
+- [x] Promote the real `u`-integral form to normative branch convention N1.
+- [x] Add τ-scan promotion rule to prevent sensitivity-run degrees-of-freedom leakage.
+- [x] Open M0 as protocol-only tranche; no benchmark results claimed.
 
 ## M1 — Infrastructure
 
@@ -62,6 +69,7 @@ This tranche lands the corrected benchmark protocol only. It does not claim benc
 
 - [ ] Implement candidate-only Möbius invariant feature path.
 - [ ] Implement `λτ(n)` map and τ sensitivity sweep.
+- [ ] Apply τ-scan promotion rule before reporting any selected τ as more than descriptive.
 - [ ] Test G4 against Model 1 and Model 2.
 
 ## M6 — Audit
@@ -81,5 +89,7 @@ Implementation must fail closed if any of the following occurs:
 - Model 3 computes invariants over primes instead of candidates;
 - a scoring model is described as a primality test;
 - a result artifact lacks deterministic manifest metadata;
-- a novelty claim is made without passing G4.
+- a novelty claim is made without passing G4;
+- complex-Ei branch conventions are used as primary Model 1 evidence;
+- τ sensitivity results are promoted without G4 and scan/multiplicity accounting.
 ```
