@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from hashlib import sha256
 from pathlib import Path
 
 from m1.campaigns import CampaignResult
 from m1.gates import GateResult, GateStatus, all_pass
 from m1.provenance import ProvenanceRecord
+from m1.serialization import to_jsonable
 
 
 @dataclass(frozen=True)
@@ -24,7 +25,7 @@ class ReportError(RuntimeError):
 
 
 def canonical_hash(obj: object) -> str:
-    payload = json.dumps(obj, sort_keys=True, default=str)
+    payload = json.dumps(to_jsonable(obj), sort_keys=True)
     return sha256(payload.encode("utf-8")).hexdigest()
 
 
@@ -55,11 +56,11 @@ def build_campaign_report(
 
 
 def write_campaign_report(path: str | Path, report: CampaignReport) -> str:
-    payload = asdict(report)
+    payload = to_jsonable(report)
     digest = canonical_hash(payload)
     wrapped = {
         "report_sha256": digest,
         "payload": payload,
     }
-    Path(path).write_text(json.dumps(wrapped, indent=2, sort_keys=True, default=str))
+    Path(path).write_text(json.dumps(wrapped, indent=2, sort_keys=True))
     return digest
