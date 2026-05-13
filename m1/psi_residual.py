@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 
+from m1.chebyshev import chebyshev_psi_increment
 from m1.li_quadrature import QuadratureConfig, zero_channel_integral
 
 
@@ -15,15 +15,13 @@ class ResidualResult:
     residual: float
 
 
-# Infrastructure placeholder.
-# Full Chebyshev psi implementation will later be replaced with a certified
-# Mangoldt-sum engine or imported audited source.
-def approximate_psi(x: int | float) -> float:
-    return float(x)
-
-
 def psi_increment(a: int | float, b: int | float) -> float:
-    return approximate_psi(b) - approximate_psi(a)
+    """Return the Chebyshev psi increment over [a,b].
+
+    This delegates to the audited von Mangoldt summation engine in
+    m1.chebyshev. Faster certified engines may replace that boundary later.
+    """
+    return chebyshev_psi_increment(a, b)
 
 
 def compute_residual(
