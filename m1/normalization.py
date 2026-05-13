@@ -10,6 +10,7 @@ class NormalizationMode(str, Enum):
     LOG_VOLUME = "log_volume"
     RH_ENVELOPE = "rh_envelope"
     PRIME_FLUX = "prime_flux"
+    BOX_PRIME_FLUX = "box_prime_flux"
 
 
 @dataclass(frozen=True)
@@ -61,6 +62,16 @@ def prime_flux_scale(a: int | float, b: int | float) -> float:
     return math.exp(u) / u
 
 
+def box_prime_flux_scale(a: int | float, b: int | float) -> float:
+    """Expected prime-flux scale over the whole log-width of the box.
+
+    This multiplies the local log-coordinate flux e^u/u by the box width
+    Delta u = log(b)-log(a). It is the preferred scale when comparing boxes
+    with different log widths.
+    """
+    return prime_flux_scale(a, b) * log_volume_scale(a, b)
+
+
 def normalization_scale(mode: NormalizationMode | str, a: int | float, b: int | float) -> float:
     mode = NormalizationMode(mode)
     if mode == NormalizationMode.ADDITIVE:
@@ -71,6 +82,8 @@ def normalization_scale(mode: NormalizationMode | str, a: int | float, b: int | 
         return rh_envelope_scale(a, b)
     if mode == NormalizationMode.PRIME_FLUX:
         return prime_flux_scale(a, b)
+    if mode == NormalizationMode.BOX_PRIME_FLUX:
+        return box_prime_flux_scale(a, b)
     raise NormalizationError(f"unsupported normalization mode: {mode}")
 
 
