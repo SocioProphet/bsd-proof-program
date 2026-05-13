@@ -56,6 +56,14 @@ def run_sweep(spec: SweepSpec, gammas: list[float]) -> SweepResult:
         raise ExperimentError("du_values must not be empty")
     if not spec.normalization_modes:
         raise ExperimentError("normalization_modes must not be empty")
+    if any(n < 0 for n in spec.truncation_levels):
+        raise ExperimentError("truncation levels must be nonnegative")
+
+    requested = max(spec.truncation_levels)
+    if requested > len(gammas):
+        raise ExperimentError(
+            f"insufficient gamma table: requested N={requested}, available={len(gammas)}"
+        )
 
     observations: list[SweepObservation] = []
 
