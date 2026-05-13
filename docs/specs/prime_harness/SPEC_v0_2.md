@@ -1,5 +1,7 @@
 # Prime Harness Benchmark — Specification v0.2
 
+**Classical first. Provenance first. No leakage. Candidate features only. Novelty only after beating the strongest verified explicit-formula baseline.**
+
 Status: implementation-ready protocol after v0.1 audit corrections.
 
 Scope: A falsifiable variance-decomposition benchmark for prime-residual prediction. The benchmark measures how much of the prime-count residual field is explained by the Riemann explicit formula under declared numerical conventions, then admits character-sector and Möbius-orbit features only if they add held-out explanatory power beyond that verified baseline.
@@ -10,7 +12,7 @@ This document supersedes SPEC v0.1. It preserves the v0.1 spine but repairs eigh
 
 Scores do not certify primes. Predictors output box-level residual estimates only. Certified primality remains the responsibility of the sieve/oracle layer.
 
-Classical first. Provenance first. No leakage. Candidate features only. Novelty only after beating the strongest verified explicit-formula baseline.
+The benchmark is not a primality test. It is a controlled measurement of residual variance explained by nested, nonleaking feature models.
 
 ## 1. Mathematical foundations
 
@@ -94,9 +96,13 @@ where
 I_n(a,b) = ∫_a^b (e^{u/2}/u) cos(γ_n u - arg(ρ_n)) du.
 ```
 
-Numerical quadrature error target: `<= 1e-8` per box for primary runs. The complex `Ei/Li(x^ρ)` form may be used only as a cross-check unless its branch convention is frozen and tested.
+Numerical quadrature error target: `<= 1e-8` per box for primary runs.
 
-### 1.4 Bounded definition of the classical baseline ceiling
+### 1.4 Normative branch convention: real-u integral only
+
+Norm N1. The primary Model 1 π-residual implementation MUST use the real `u`-integral form for `I_n(a,b)`. The complex `Ei/Li(x^ρ)` form is permitted only as a cross-check and may not be used for promotion gates unless its branch convention, implementation library, and platform behavior are frozen and tested. This removes branch-cut ambiguity from the primary benchmark.
+
+### 1.5 Bounded definition of the classical baseline ceiling
 
 In this benchmark, the phrase `classical ceiling` means:
 
@@ -211,6 +217,22 @@ R_hat_j^(3) = R_hat_j^(2A or 2B) + d · Inv_j^(τ)
 ```
 
 with coefficients fit on training boxes only and evaluated on held-out boxes.
+
+### 2.4 τ-scan promotion rule
+
+The primary τ value is `τ = log 2`. The other τ values are sensitivity runs, not free hyperparameter searches.
+
+If a sensitivity τ outperforms the primary τ, it may be reported as a robustness finding. It may be promoted only if:
+
+```text
+- the τ value was pre-registered before evaluation;
+- the same no-leakage and blocked-CV protocol is used;
+- the gain passes G4 relative to the measured Model 1 baseline;
+- the confidence interval or multiplicity correction accounts for the τ scan;
+- the primary τ result is still reported alongside the selected τ.
+```
+
+Without these conditions, a better sensitivity τ is descriptive only and cannot support a novelty claim.
 
 ## 3. Box design
 
@@ -347,7 +369,7 @@ VarExpl(m) >= VarExpl(1,N*) + 0.05
 
 with bootstrap confidence interval on the difference excluding zero, on at least three of four valid intervals/folds.
 
-This is the novelty falsifier.
+This is the novelty falsifier. If Model 3 is evaluated over multiple τ values, G4 must be applied after accounting for the τ scan as specified in §2.4.
 
 ### G5 — Reproducibility
 
