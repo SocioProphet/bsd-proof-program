@@ -24,12 +24,55 @@ This tranche contains type contracts, runbooks, tests, audit documentation, and 
 
 ---
 
+## Heller-Godel / PFK dependency
+
+This repository consumes the canonical Heller-Godel framework and Proof Fabric Kernel at:
+
+```text
+SocioProphet/Heller-Godel @ 988307215ad38ccb16514311222184a1b757752b
+```
+
+See:
+
+```text
+DEPENDENCIES.md
+```
+
+PFK schemas and registry docs are canonical in Heller-Godel under:
+
+```text
+proof_fabric_kernel/
+```
+
+Local schema material, if any, is non-authoritative unless explicitly declared generated/cache-only. It must not shadow canonical PFK schema names.
+
+---
+
+## BSD Program Lane v0.1 skeleton
+
+This repository now includes a structural skeleton for `BSD_Program_Lane_v0.1.pdf`:
+
+```text
+docs/program-spec/bsd-program-lane-v0_1.md
+docs/workstream-a/README.md
+docs/workstream-b/README.md
+docs/workstream-c/README.md
+docs/workstream-d/README.md
+docs/workstream-e/README.md
+docs/workstream-f/README.md
+```
+
+The skeleton records workstream structure and claim boundaries only. It is not a full-text Drive PDF import and does not change M6 promotion discipline.
+
+---
+
 ## Status
 
 | Tranche | Status | Mathematics added |
 |---|---|---|
 | v0.5 inherited | Canonical baseline | existing |
 | v0.3.2 handoff | M6 pre-execution scaffolding | none — documentation, schema, tests |
+| BSD lane v0.1 skeleton | Structural scaffold | none — workstream structure and dependencies only |
 | v0.6.0 next | M6.0 → M6.8 execution | TBD per outcome |
 
 ---
@@ -80,11 +123,19 @@ Generated M6.0 outputs are not part of the initial handoff baseline unless expli
 ├── Makefile
 ├── requirements.txt
 ├── pyproject.toml
+├── DEPENDENCIES.md
 ├── .github/workflows/validate.yml
 ├── data/v0.5/
 ├── docs/audit/
+├── docs/program-spec/
 ├── docs/runbooks/
 ├── docs/specs/
+├── docs/workstream-a/
+├── docs/workstream-b/
+├── docs/workstream-c/
+├── docs/workstream-d/
+├── docs/workstream-e/
+├── docs/workstream-f/
 ├── m6/models/
 ├── m6/scripts/
 ├── reports/v0.5/
