@@ -1,0 +1,35 @@
+name: bsd-proof-program PFK Dependency Validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate-pfk-dependency:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout bsd-proof-program
+        uses: actions/checkout@v4
+        with:
+          path: bsd-proof-program
+
+      - name: Checkout Heller-Godel at pinned commit
+        uses: actions/checkout@v4
+        with:
+          repository: SocioProphet/Heller-Godel
+          ref: 988307215ad38ccb16514311222184a1b757752b
+          path: Heller-Godel
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate canonical PFK dependency
+        env:
+          HELLER_GODEL_ROOT: ${{ github.workspace }}/Heller-Godel
+        run: |
+          cd bsd-proof-program
+          python -m unittest tests/test_pfk_dependency.py -v
