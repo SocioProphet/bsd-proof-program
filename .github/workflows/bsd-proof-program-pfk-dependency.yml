@@ -19,17 +19,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: SocioProphet/Heller-Godel
-          ref: 988307215ad38ccb16514311222184a1b757752b
+          ref: e385bad859c49604cff5a3f4945b33079d54af82
           path: Heller-Godel
+
+      - name: Checkout Heller-Dirac at pinned commit
+        uses: actions/checkout@v4
+        with:
+          repository: SocioProphet/Heller-Dirac
+          ref: e1d7c863f4e0fc6e5e2ab485370cc75b2dba3993
+          path: Heller-Dirac
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Validate canonical PFK dependency
+      - name: Validate canonical dependencies
         env:
           HELLER_GODEL_ROOT: ${{ github.workspace }}/Heller-Godel
+          HELLER_DIRAC_ROOT: ${{ github.workspace }}/Heller-Dirac
         run: |
           cd bsd-proof-program
           python -m unittest tests/test_pfk_dependency.py -v
